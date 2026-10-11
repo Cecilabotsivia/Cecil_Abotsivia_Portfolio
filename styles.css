@@ -1,0 +1,797 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Manrope:wght@400;500;600&display=swap");
+
+/* ============================================================
+   1. Tokens
+   ============================================================ */
+:root {
+  --ink: #0d1014;
+  --panel: rgba(13, 16, 20, 0.78);
+  --bone: #f1ece2;
+  --body-text: #cfd4db;
+  --muted: #a9b0ba;
+  --ochre: #d1a24a;
+  --ochre-hover: #e0b463;
+  --line: rgba(241, 236, 226, 0.14);
+  --line-strong: rgba(209, 162, 74, 0.5);
+  --error: #f0a195;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --nav-h: 72px;
+  --radius: 6px;
+}
+
+/* ============================================================
+   2. Base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ink);
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: poppins, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--bone);
+}
+
+/* Site-wide background: the portrait, fixed behind every page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("Cecil.jpg") center 12% / cover no-repeat;
+  filter: grayscale(0.25) contrast(1.05);
+}
+
+/* Dark gradient so text stays readable over the photo */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(13, 16, 20, 0.96) 0%,
+    rgba(13, 16, 20, 0.86) 42%,
+    rgba(13, 16, 20, 0.62) 100%
+  );
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--bone);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ochre);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(1120px, 92%);
+  margin-inline: auto;
+}
+
+/* ============================================================
+   3. Typography
+   ============================================================ */
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  font-variation-settings: "opsz" 144;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+}
+
+.eyebrow {
+  font-size: 0.9rem;
+  color: var(--ochre);
+  margin: 0 0 12px;
+}
+
+.lead {
+  font-size: 1.125rem;
+  color: var(--body-text);
+  max-width: 60ch;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 12px;
+}
+
+/* ============================================================
+   4. Buttons and links
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--ochre);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  background: var(--ochre-hover);
+}
+
+.btn-outline {
+  border-color: var(--bone);
+  color: var(--bone);
+}
+
+.btn-outline:hover {
+  background: var(--bone);
+  color: var(--ink);
+}
+
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.project-link {
+  align-self: flex-start;
+  color: var(--ochre);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ============================================================
+   5. Navigation
+   ============================================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: var(--nav-h);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(13, 16, 20, 0.85);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom-color: var(--line);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.brand {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.brand span {
+  color: var(--ochre);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--bone);
+}
+
+.nav-links a.btn-small {
+  padding: 8px 16px;
+  border: 1px solid var(--ochre);
+  border-radius: 999px;
+  color: var(--ochre);
+}
+
+.nav-links a.btn-small:hover,
+.nav-links a.btn-small[aria-current="page"] {
+  background: var(--ochre);
+  color: var(--ink);
+}
+
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 5px auto;
+  background: var(--bone);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   6. Layout blocks
+   ============================================================ */
+.section {
+  position: relative;
+  padding: 96px 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Inner page header: pushes content below the fixed navbar */
+.page-top {
+  padding-top: calc(var(--nav-h) + 56px);
+  padding-bottom: 0;
+  border-top: 0;
+}
+
+/* Podcast page: keep the bottom spacing after the page header */
+.podcast-section {
+  padding-bottom: 96px;
+}
+
+/* Home hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--nav-h) + 40px) 0 80px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.hero-photo {
+  justify-self: end;
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+}
+
+.accent {
+  color: inherit;
+}
+
+/* ============================================================
+   7. Tags
+   ============================================================ */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.tags span {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(13, 16, 20, 0.5);
+  font-size: 0.9rem;
+}
+
+.tags.small span {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+/* ============================================================
+   8. Experience timeline
+   ============================================================ */
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  margin-top: 40px;
+  padding-left: 28px;
+  border-left: 1px solid var(--line);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -35px;
+  top: 28px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--ochre);
+  box-shadow: 0 0 0 4px rgba(209, 162, 74, 0.2);
+}
+
+.timeline-card {
+  padding: 24px 28px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.timeline-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--body-text);
+}
+
+.timeline-card li {
+  margin-bottom: 6px;
+}
+
+/* ============================================================
+   9. Cards, projects, certifications
+   ============================================================ */
+.project-grid,
+.cert-grid {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.project-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.cert-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--bone);
+  text-decoration: none;
+}
+
+/* Cards that are links (home page quick links) */
+a.card {
+  transition: border-color 0.2s ease;
+}
+
+a.card:hover {
+  border-color: var(--line-strong);
+}
+
+.card p {
+  margin: 0;
+  flex: 1;
+  color: var(--body-text);
+}
+
+.project-tag {
+  font-size: 0.85rem;
+  color: var(--ochre);
+}
+
+.project-img {
+  width: 72px;
+  height: 72px;
+  padding: 6px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: var(--radius);
+}
+
+.cert-img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.cert-id {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   10. Podcast
+   ============================================================ */
+.podcast-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.podcast-art {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.tar-logo {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 10vw, 6rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.tar-logo span {
+  color: var(--ochre);
+}
+
+.podcast-art p {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.status {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+   11. Contact
+   ============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.contact-details {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+}
+
+.contact-details li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.contact-details .label {
+  min-width: 72px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.contact-details a {
+  text-decoration: none;
+}
+
+.contact-details a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.sep {
+  color: var(--muted);
+}
+
+.contact-form {
+  display: grid;
+  gap: 20px;
+  padding: 32px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.field input,
+.field textarea {
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--bone);
+  background: rgba(241, 236, 226, 0.04);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--ochre);
+  box-shadow: 0 0 0 3px rgba(209, 162, 74, 0.25);
+}
+
+.field.invalid input,
+.field.invalid textarea {
+  border-color: var(--error);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.error {
+  min-height: 1em;
+  color: var(--error);
+  font-size: 0.85rem;
+}
+
+.contact-form .btn {
+  justify-self: start;
+  border: 0;
+}
+
+.form-status {
+  margin: 0;
+  min-height: 1.4em;
+  color: var(--ochre);
+}
+
+.form-status.error-text {
+  color: var(--error);
+}
+
+/* ============================================================
+   12. Footer
+   ============================================================ */
+.footer {
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  background: rgba(13, 16, 20, 0.6);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--bone);
+}
+
+/* ============================================================
+   13. Scroll reveal (only when JavaScript runs)
+   ============================================================ */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   14. Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero-grid,
+  .podcast-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-photo {
+    order: -1;
+    justify-self: center;
+    max-width: 280px;
+  }
+
+  .podcast-grid .podcast-art {
+    max-width: 320px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+}
+
+@media (max-width: 720px) {
+  body::after {
+    background: linear-gradient(
+      180deg,
+      rgba(13, 16, 20, 0.9) 0%,
+      rgba(13, 16, 20, 0.82) 50%,
+      rgba(13, 16, 20, 0.96) 100%
+    );
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 4%;
+    background: rgba(13, 16, 20, 0.97);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 1.05rem;
+  }
+
+  .timeline-card,
+  .card,
+  .contact-form {
+    padding: 22px;
+  }
+
+  .timeline-dot {
+    top: 26px;
+  }
+
+  .page-top {
+    padding-top: calc(var(--nav-h) + 40px);
+  }
+}
+
+/* ============================================================
+   15. Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

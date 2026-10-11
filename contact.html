@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Contact Cecil Abotsivia about property management, real estate operations, website projects, or podcast collaborations.">
+  <title>Contact | Cecil Abotsivia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">Akogun<span>.</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">About</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="podcast.html">Podcast</a></li>
+        <li><a href="contact.html" class="btn-small active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contact -->
+  <section class="section page-top">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <p class="eyebrow">Contact</p>
+        <h1>Let's work together</h1>
+        <p class="lead">Property management, real estate operations, website projects, or podcast collaborations. Send a message and let us vibe.</p>
+
+        <ul class="contact-details">
+          <li>
+            <span class="label">Email</span>
+            <a href="mailto:cecilabotsivia69@gmail.com">cecilabotsivia69@gmail.com</a>
+          </li>
+          <li>
+            <span class="label">Phone</span>
+            <a href="tel:+233551437169">0551437169</a>
+            <span class="sep">/</span>
+            <a href="tel:+233555530021">0555530021</a>
+          </li>
+          <li>
+            <span class="label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/cecil-yao-abotsivia-197390271" target="_blank" rel="noopener">linkedin.com/in/cecil-yao-abotsivia-197390271</a>
+          </li>
+          <li>
+            <span class="label">Facebook</span>
+            <a href="https://www.facebook.com/335681279626152" target="_blank" rel="noopener">facebook.com/335681279626152</a>
+          </li>
+          <li>
+            <span class="label">WhatsApp</span>
+            <a href="https://wa.me/233551437169" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          </li>
+          <li>
+            <span class="label">Instagram</span>
+            <a href="https://www.instagram.com/cecil_the_broker/" target="_blank" rel="noopener">@cecil_the_broker</a>
+          </li>
+          <li>
+            <span class="label">Location</span>
+            <span>Ghana</span>
+          </li>
+        </ul>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+          <small class="error" id="nameError"></small>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          <small class="error" id="emailError"></small>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <small class="error" id="messageError"></small>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year"></span> Cecil Abotsivia</span>
+      <a href="#">Back to top &uarr;</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
